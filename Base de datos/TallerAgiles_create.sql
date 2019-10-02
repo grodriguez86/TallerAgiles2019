@@ -92,104 +92,78 @@ CREATE TABLE Tag (
 ALTER TABLE Articulo_Encuesta ADD CONSTRAINT Articulo_Encuesta_Encuesta
     FOREIGN KEY (Encuesta_Contenido_idContenido)
     REFERENCES Encuesta (Contenido_idContenido)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: Comentario_Cuenta (table: Comentario)
 ALTER TABLE Comentario ADD CONSTRAINT Comentario_Cuenta
     FOREIGN KEY (Cuenta_username)
     REFERENCES Cuenta (username)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: Comentario_Noticia (table: Comentario)
 ALTER TABLE Comentario ADD CONSTRAINT Comentario_Noticia
     FOREIGN KEY (Noticia_Contenido_idContenido)
     REFERENCES Noticia (Contenido_idContenido)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: Contenido_Cuenta (table: Contenido)
 ALTER TABLE Contenido ADD CONSTRAINT Contenido_Cuenta
     FOREIGN KEY (Cuenta_username)
     REFERENCES Cuenta (username)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: Contenido_Tag (table: Contenido)
 ALTER TABLE Contenido ADD CONSTRAINT Contenido_Tag
     FOREIGN KEY (Tag_idTag)
     REFERENCES Tag (idTag)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: Encuesta_Contenido (table: Encuesta)
 ALTER TABLE Encuesta ADD CONSTRAINT Encuesta_Contenido
     FOREIGN KEY (Contenido_idContenido)
     REFERENCES Contenido (idContenido)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: MeGusta_Cuenta (table: MeGusta)
 ALTER TABLE MeGusta ADD CONSTRAINT MeGusta_Cuenta
     FOREIGN KEY (Cuenta_username)
     REFERENCES Cuenta (username)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: MeGusta_Noticia (table: MeGusta)
 ALTER TABLE MeGusta ADD CONSTRAINT MeGusta_Noticia
     FOREIGN KEY (Noticia_Contenido_idContenido)
     REFERENCES Noticia (Contenido_idContenido)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- Reference: Noticia_Contenido (table: Noticia)
 ALTER TABLE Noticia ADD CONSTRAINT Noticia_Contenido
     FOREIGN KEY (Contenido_idContenido)
-    REFERENCES Contenido (idContenido)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
+    REFERENCES Contenido (idContenido)
 ;
 
 -- Reference: Permisos_Cuenta (table: Permisos)
 ALTER TABLE Permisos ADD CONSTRAINT Permisos_Cuenta
     FOREIGN KEY (Cuenta_username)
-    REFERENCES Cuenta (username)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
+    REFERENCES Cuenta (username)
 ;
 
 -- Reference: Permisos_Tag (table: Permisos)
 ALTER TABLE Permisos ADD CONSTRAINT Permisos_Tag
     FOREIGN KEY (Tag_idTag)
-    REFERENCES Tag (idTag)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
+    REFERENCES Tag (idTag)
 ;
 
 -- Reference: Suscripcion_Cuenta (table: Suscripcion)
 ALTER TABLE Suscripcion ADD CONSTRAINT Suscripcion_Cuenta
     FOREIGN KEY (Cuenta_username)
-    REFERENCES Cuenta (username)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
+    REFERENCES Cuenta (username)
 ;
 
 -- Reference: Suscripcion_Tag (table: Suscripcion)
 ALTER TABLE Suscripcion ADD CONSTRAINT Suscripcion_Tag
     FOREIGN KEY (Tag_idTag)
     REFERENCES Tag (idTag)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
 ;
 
 -- End of file.
