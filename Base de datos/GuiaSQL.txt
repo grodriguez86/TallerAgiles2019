@@ -1,0 +1,29 @@
+Instrucciones para crear servidor mysql en linux:
+
+https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/
+
+si /usr/bin/mysql -u root -p tira error de password authentication,
+
+$ sudo mysql -u root #
+mysql> USE mysql;
+mysql> CREATE USER 'YOUR_SYSTEM_USER'@'localhost' IDENTIFIED BY 'password';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'YOUR_SYSTEM_USER'@'localhost';
+mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='YOUR_SYSTEM_USER';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+$ service mysql restart 
+
+Con eso te creas un nuevo usuario para la base de datos, que podes usar para abrir el shell de mysql, y para autenticarte desde node.js.
+
+Teniendo la base de datos corriendo:
+en el shell de mysql:
+Create database elnombredelabase;
+USE elnombredelabase;
+source 'dir del archivo de talleragiles_create.sql'.
+
+Para poder usar mysql en node, npm install mysql en consola.
+
+Para empezar a probar, se puede modificar los datos de autenticacion en server.js, y la conexion con la base de datos deberia andar perfectamente.
+
+
