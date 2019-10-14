@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Picker, Button, Alert } from 'react-native';
-import user from './components/usuario.js';
-import PickerUsuario from './components/pickerUsuario.js'
+import user from '../components/usuario.js';
+import PickerUsuario from '../components/pickerUsuario.js'
 
 export default class viewCrearUsuario extends Component{
 
