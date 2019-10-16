@@ -36,18 +36,17 @@ app.get('/users', function (req, res) {
 });
 
 app.get('/user/:username', function (req, res) {
-  
+    
     let username = req.params.username;
-  
+
     if (!username) {
         return res.status(400).send({ error: true, message: 'Please provide username' });
     }
-  
-    dbConn.query('SELECT * FROM users where id=?', username, function (error, results, fields) {
+
+    con.query('SELECT * FROM Cuenta where username=?', username, function (error, results, fields) {
         if (error) throw error;
-        return res.send({ error: false, data: results[0], message: 'users list.' });
+        return res.send({ error: false, data: results, message: 'users list.' });
     });
-  
 });
 
 app.post('/user', function(req, res) {
