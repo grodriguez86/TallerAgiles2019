@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import guardarUsuario from '../servicios/servicioUser'
 import user from './components/usuario.js';
-
+{/*FALTA PASSWORD - FECHA NAC*/ }
 export default class viewCrearUsuario extends Component{
 
   constructor(props){
@@ -22,7 +23,9 @@ export default class viewCrearUsuario extends Component{
   apellidoPersona: '',
   emailPersona: '',
   direccionPersona: '',
-  telefonoPersona: ''};
+  telefonoPersona: '',
+  fechaNacPersona: '',
+  passwordPersona: ''};
 
 
   actualizarUsuario(nombreUsuario){this.setState({nombreUsuario})}
@@ -31,9 +34,11 @@ export default class viewCrearUsuario extends Component{
   actualizarEmail(emailPersona){this.setState({emailPersona})}
   actualizarDireccion(direccionPersona){this.setState({direccionPersona})}
   actualizarTelefono(telefonoPersona){this.setState({telefonoPersona})}
+  actualizarTelefono(fechaNacPersona){this.setState({fechaNacPersona})}
+  actualizarTelefono(passwordPersona){this.setState({passwordPersona})}
 
   crearUsuario(){
-    if(this.state.nombreUsuario == '' || this.state.nombrePersona=='' || this.state.apellidoPersona=='' || this.state.direccionPersona=='' || this.state.telefonoPersona=='' || this.state.emailPersona==''){
+    if(this.state.nombreUsuario == '' || this.state.fechaNacPersona == '' || this.state.passwordPersona == '' || this.state.nombrePersona=='' || this.state.apellidoPersona=='' || this.state.direccionPersona=='' || this.state.telefonoPersona=='' || this.state.emailPersona==''){
       Alert.alert('Ningun campo puede quedar vacio')
     }else{
       usuarioNuevo = new user(this.state.nombreUsuario, 
@@ -41,8 +46,13 @@ export default class viewCrearUsuario extends Component{
       this.state.apellidoPersona,
       this.state.direccionPersona,
       this.state.telefonoPersona,
-      this.state.emailPersona);
-      Alert.alert('Nuevo usuario creado')
+      this.state.fechaNacPersona,
+      this.state.passwordPersona,
+      this.state.emailPersona,
+      this.state.password,
+      this.state.fechaNac
+      );
+      guardarUsuario(usuarioNuevo)
     }
   }
   
@@ -118,6 +128,32 @@ export default class viewCrearUsuario extends Component{
               <TextInput style={styles.textStyle} 
                 placeholder="Direccion"
                 onChangeText ={this.actualizarDireccion}
+                />
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su password:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Password"
+                onChangeText ={this.actualizarPassword}
+                />
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su fecha de nacimiento:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Fecha de nacimiento"
+                onChangeText ={this.actualizarFechaNac}
                 />
             </View>
           </View>

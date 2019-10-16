@@ -1,78 +1,186 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Picker, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import guardarUsuario from './servicios/servicioUser'
 import user from './components/usuario.js';
-import PickerUsuario from './components/pickerUsuario.js'
-
+{/*FALTA PASSWORD - FECHA NAC*/ }
 export default class viewCrearUsuario extends Component{
 
   constructor(props){
     super(props);
-    
-    this.actualizarUsuario = this.actualizarUsuario.bind(this);
-  }
   
-  state = {
-    nombreUsuario: 'Sin usuario'
-  };
+    this.actualizarUsuario = this.actualizarUsuario.bind(this);
+    this.actualizarNombre = this.actualizarNombre.bind(this);
+    this.actualizarApellido = this.actualizarApellido.bind(this);
+    this.actualizarEmail = this.actualizarEmail.bind(this);
+    this.actualizarDireccion = this.actualizarDireccion.bind(this);
+    this.actualizarTelefono = this.actualizarTelefono.bind(this);
+    
+    this.crearUsuario = this.crearUsuario.bind(this);
+  }
 
-  actualizarUsuario(nombreUsuario){
-    this.setState({nombreUsuario})
+  state = {nombreUsuario: '',
+  nombrePersona: '',
+  apellidoPersona: '',
+  emailPersona: '',
+  direccionPersona: '',
+  telefonoPersona: '',
+  fechaNacPersona: '',
+  passwordPersona: ''};
+
+
+  actualizarUsuario(nombreUsuario){this.setState({nombreUsuario})}
+  actualizarNombre(nombrePersona){this.setState({nombrePersona})}
+  actualizarApellido(apellidoPersona){this.setState({apellidoPersona})}
+  actualizarEmail(emailPersona){this.setState({emailPersona})}
+  actualizarDireccion(direccionPersona){this.setState({direccionPersona})}
+  actualizarTelefono(telefonoPersona){this.setState({telefonoPersona})}
+  actualizarTelefono(fechaNacPersona){this.setState({fechaNacPersona})}
+  actualizarTelefono(passwordPersona){this.setState({passwordPersona})}
+
+  crearUsuario(){
+    if(this.state.nombreUsuario == '' || this.state.fechaNacPersona == '' || this.state.passwordPersona == '' || this.state.nombrePersona=='' || this.state.apellidoPersona=='' || this.state.direccionPersona=='' || this.state.telefonoPersona=='' || this.state.emailPersona==''){
+      Alert.alert('Ningun campo puede quedar vacio')
+    }else{
+      usuarioNuevo = new user(this.state.nombreUsuario, 
+      this.state.nombrePersona, 
+      this.state.apellidoPersona,
+      this.state.direccionPersona,
+      this.state.telefonoPersona,
+      this.state.fechaNacPersona,
+      this.state.passwordPersona,
+      this.state.emailPersona,
+      this.state.password,
+      this.state.fechaNac
+      );
+      guardarUsuario(usuarioNuevo)
+    }
   }
   
   render(){
-
-    /*Esto esta hardcodeado pero luego va a ser una lista dada por el back con todos los usuario del sistema */
-    const usuarios = [new user('a','a','a','b','b','b'),
-    new user('b','a','a','c','c','c'),
-    new user('c','a','a','b','b','b'),
-    new user('d','a','a','b','b','b'),
-    new user('e','a','a','b','b','b'),
-    new user('aa','a','a','b','b','b'),
-    new user('ab','a','a','c','c','c'),
-    new user('ac','a','a','b','b','b'),
-    new user('ad','a','a','b','b','b'),
-    new user('ae','a','a','b','b','b'),
-    new user('ba','a','a','b','b','b'),
-    new user('bb','a','a','c','c','c'),
-    new user('bc','a','a','b','b','b'),
-    new user('bd','a','a','b','b','b'),
-    new user('be','a','a','b','b','b'),
-    new user('ca','a','a','b','b','b'),
-    new user('cb','a','a','c','c','c'),
-    new user('cc','a','a','b','b','b'),
-    new user('cd','a','a','b','b','b'),
-    new user('ce','a','a','b','b','b')]
-
-
     return(
     <View style={styles.container}>
       <View style={styles.titulo}>{/*titulo*/}
       <View style={{flex:1}}>
           <View>
-            <Text style={{fontSize:26, color:'white', textAlign:'center', fontWeight: 'bold', paddingBottom:5}}>Editar permisos a usuarios</Text>
+            <Text style={{fontSize:26, color:'white', textAlign:'center', fontWeight: 'bold', paddingBottom:5}}>Agregar usuario</Text>
           </View>
         </View>
       </View>
-      <View style={styles.informacion}>{/*contenido gral donde se elige el usuario y se cambian dinamicamente los permisos del usuario*/}
-        <View style={{flexDirection: 'row', height : 100, backgroundColor: '#eeeeee', alignItems: 'center'}}>{/*usuario row flex 1*/}
-          <View style={{flex: 1}}>
-            <View style={{flexDirection: 'row'}}>
-            <Text style={[styles.textStyle2,{fontSize:16,textAlignVertical:'center'}]}>Seleccione un usuario:</Text>
-            <PickerUsuario usuarios={usuarios} padre={this}/>
+      <View style={styles.informacion}>{/*contenido de form -- flex 1*/}
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese un nombre de usuario:</Text>
             </View>
-            <View style={{height:60}}>          
-              <Text style={[styles.textStyle2,{fontSize:20,textAlignVertical:'center'}]}>{'Usuario:' + this.state.nombreUsuario}</Text>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Nombre usuario"
+                onChangeText ={this.actualizarUsuario}
+                />
             </View>
           </View>
         </View>
-        <View style={{flex:1}}>{/*view de los permisos con flex 1, habria que hacer un componente de list view
-            donde se le pasa la prop de lista de permisos asociados a ese usuario*/}
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su nombre:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Nombre"
+                onChangeText ={this.actualizarNombre}
+                />
+            </View>
+          </View>
         </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su apellido:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Apellido"
+                onChangeText ={this.actualizarApellido}
+                />
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su email:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Email"
+                onChangeText ={this.actualizarEmail}
+                />
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su direccion:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Direccion"
+                onChangeText ={this.actualizarDireccion}
+                />
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su password:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Password"
+                onChangeText ={this.actualizarPassword}
+                />
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su fecha de nacimiento:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Fecha de nacimiento"
+                onChangeText ={this.actualizarFechaNac}
+                />
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+            <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Ingrese su telefono:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <TextInput style={styles.textStyle} 
+                placeholder="Telefono"
+                onChangeText ={this.actualizarTelefono}
+                />
+            </View>
+            </View>
+          </View>
       </View>
-      <View style={styles.botones}>{/*botones atra*/}
-        <View style={{marginHorizontal:15, flexDirection:'row', flex:1, justifyContent:'flex-start'}}>{/*Esta por fila*/}
+      <View style={styles.botones}>{/*botones atras y guardar*/}
+        <View style={{marginHorizontal:15, flexDirection:'row', flex:1, justifyContent:'space-between'}}>{/*Esta por fila*/}
             <Button title="Atras" 
              color='#072F46'
+            />
+
+            <Button title="Guardar" 
+             color='#072F46'
+             onPress = {this.crearUsuario}
             />
           </View>
       </View>
@@ -107,6 +215,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#eeeeee',
+  },
+  grupo: {
+    height:100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  columnaFlex1:{
+    flex:1,
+  },
+  columna: {
+    flex: 1,
+    height:100,
+    alignItems: 'center',
+  },
+  textStyle:{
+    flex:1,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    textAlign:'center',
+    marginHorizontal: 10,
+    borderWidth: 1,
+    borderRadius:5,
   },
   textStyle2:{
     flex:1,
