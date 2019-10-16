@@ -14,6 +14,8 @@ export default class viewCrearUsuario extends Component{
     this.actualizarEmail = this.actualizarEmail.bind(this);
     this.actualizarDireccion = this.actualizarDireccion.bind(this);
     this.actualizarTelefono = this.actualizarTelefono.bind(this);
+    this.actualizarFechaNac = this.actualizarFechaNac.bind(this);
+    this.actualizarPassword = this.actualizarPassword.bind(this);
     
     this.crearUsuario = this.crearUsuario.bind(this);
   }
@@ -34,11 +36,11 @@ export default class viewCrearUsuario extends Component{
   actualizarEmail(emailPersona){this.setState({emailPersona})}
   actualizarDireccion(direccionPersona){this.setState({direccionPersona})}
   actualizarTelefono(telefonoPersona){this.setState({telefonoPersona})}
-  actualizarTelefono(fechaNacPersona){this.setState({fechaNacPersona})}
-  actualizarTelefono(passwordPersona){this.setState({passwordPersona})}
+  actualizarFechaNac(fechaNacPersona){this.setState({fechaNacPersona})}
+  actualizarPassword(passwordPersona){this.setState({passwordPersona})}
 
   crearUsuario(){
-    if(this.state.nombreUsuario == '' || this.state.fechaNacPersona == '' || this.state.passwordPersona == '' || this.state.nombrePersona=='' || this.state.apellidoPersona=='' || this.state.direccionPersona=='' || this.state.telefonoPersona=='' || this.state.emailPersona==''){
+    if(this.state.nombreUsuario  == '' || this.state.passwordPersona == '' || this.state.nombrePersona=='' || this.state.apellidoPersona=='' || this.state.direccionPersona=='' || this.state.telefonoPersona=='' || this.state.emailPersona==''){
       Alert.alert('Ningun campo puede quedar vacio')
     }else{
       usuarioNuevo = new user(this.state.nombreUsuario, 
@@ -46,12 +48,10 @@ export default class viewCrearUsuario extends Component{
       this.state.apellidoPersona,
       this.state.direccionPersona,
       this.state.telefonoPersona,
-      this.state.fechaNacPersona,
-      this.state.passwordPersona,
       this.state.emailPersona,
-      this.state.password,
-      this.state.fechaNac
-      );
+      this.state.passwordPersona,
+      this.state.fechaNacPersona
+     );
       guardarUsuario(usuarioNuevo)
     }
   }
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     color :'#072F46',
     textAlign:'left',
     fontWeight: 'bold',
-    fontSize:20,
+    fontSize:12,
     margin: 10,
   }
 });

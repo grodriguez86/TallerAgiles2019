@@ -6,14 +6,15 @@ export default function guardarUsuario(usuario){
         'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        username = usuario.usuario,
-        password = usuario.password,
-        apellido = usuario.apellido,
-        direccion = usuario.direccion,
-        email = usuario.email,
-        nombre = usuario.nombre,
-        telefono = usuario.telefono,
-        fecha_nacimiento = usuario.fechanac
+        username: usuario.usuario,
+        password: usuario.password,
+        apellido: usuario.apellido,
+        direccion: usuario.direccion,
+        mail: usuario.email,
+        nombre: usuario.nombre,
+        telefono: usuario.telefono,
+        fecha_nacimiento: usuario.fechanac,
+        admin: false
         }),
     });
 }
