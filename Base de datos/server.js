@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 
 var INSERT_INTO_USER = "INSERT INTO Cuenta (username, password, admin, mail, fecha_nacimiento, telefono, nombre, apellido, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 var INSERT_INTO_PERMISOS = "insert into Permisos (Cuenta_username, Tag_idTag, escritura, lectura) VALUES (?, ?, ?, ?)";
-var INSERT_INTO_COMENTARIO = "INSERT INTO Comentario (Cuenta_username, Noticia_Contenido_idContenido, Texto_Comrentario) VALUES (?, ?, ?)";
+var INSERT_INTO_COMENTARIO = "INSERT INTO Comentario (Cuenta_username, Noticia_Contenido_idContenido, Texto_Comentario) VALUES (?, ?, ?)";
 var INSERT_INTO_TAG = "INSERT INTO Tag (idTag, nombre) VALUES (?, ?)";
 var DELETE_CUENTA_USERNAME = "DELETE FROM Cuenta WHERE username = ?";
 var GET_CUENTA = "SELECT * FROM Cuenta";
@@ -22,8 +22,8 @@ app.use(bodyParser.urlencoded({
   
 var con = mysql.createConnection({
     host: "localhost",
-    user: "guidomodarelli",
-    password: "Librocorto13.-,",
+    user: "root",
+    password: "",
     insecureAuth : true,
     database: "talleragiles"
 });
@@ -116,7 +116,10 @@ app.post('/user', function(req, res) {
 
     con.query(INSERT_INTO_USER, [user.username, user.password, user.admin, user.mail, user.fecha_nacimiento, user.telefono, user.nombre, user.apellido, user.direccion], 
     function (error, results, fields) {
-        if (error) throw error;
+        if (error) {
+		console.log("there was an error during user creation");
+		return res.status(400).send({ error: true, message: 'Error in parameters' });
+	};
         return res.send({ error: false, data: results, message: 'New user has been created successfully.' });
     });
 })
@@ -126,7 +129,7 @@ app.post('/noticias/:id', function(req, res) {
     var id = req.params.id;
 
     if (!id) {
-        return res.status(400).send({ error: true, message: 'Please provide username' });
+        return res.status(400).send({ error: true, message: 'Please provide news_id' });
     }
 
     con.query(INSERT_INTO_COMENTARIO, [req.body.username, id, req.body.contenido], function(error, results, fields) {
@@ -140,7 +143,7 @@ app.post('/label', function(req, res) {
     var label = req.body;
 
     if (!label) {
-        return res.status(400).send({ error: true, message: 'Please provide username' });
+        return res.status(400).send({ error: true, message: 'Error in parameters' });
     }
 
     con.query(INSERT_INTO_TAG, function(error, results, fields) {
@@ -154,7 +157,7 @@ app.post('/user/:username/permisos', function(req, res) {
     var permisos = req.body;
 
     if (!permisos) {
-        return res.status(400).send({ error: true, message: 'Please provide username' });
+        return res.status(400).send({ error: true, message: 'Error in parameters' });
     }
 
     con.query(INSERT_INTO_PERMISOS, username, function(error, results, fields) {

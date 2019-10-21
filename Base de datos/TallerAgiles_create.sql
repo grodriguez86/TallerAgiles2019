@@ -6,7 +6,7 @@
 CREATE TABLE Articulo_Encuesta (
     Encuesta_Contenido_idContenido int  NOT NULL,
     idArticulo int  NOT NULL,
-    opcion varchar(20)  NOT NULL,
+    opcion varchar(30)  NOT NULL,
     contador int  NOT NULL,
     CONSTRAINT Articulo_Encuesta_pk PRIMARY KEY (Encuesta_Contenido_idContenido,idArticulo)
 );
@@ -15,15 +15,15 @@ CREATE TABLE Articulo_Encuesta (
 CREATE TABLE Comentario (
     Cuenta_username varchar(25)  NOT NULL,
     Noticia_Contenido_idContenido int  NOT NULL,
-    Texto_Comrentario text  NOT NULL,
+    Texto_Comentario text  NOT NULL,
     CONSTRAINT Comentario_pk PRIMARY KEY (Cuenta_username,Noticia_Contenido_idContenido)
 );
 
 -- Table: Contenido
 CREATE TABLE Contenido (
     idContenido int  NOT NULL,
-    titulo varchar(30)  NOT NULL,
-    descripcion varchar(150)  NOT NULL,
+    titulo varchar(50)  NOT NULL,
+    descripcion varchar(200)  NOT NULL,
     Tag_idTag int  NOT NULL,
     Cuenta_username varchar(25)  NOT NULL,
     CONSTRAINT Contenido_pk PRIMARY KEY (idContenido)
@@ -39,14 +39,14 @@ CREATE TABLE Cuenta (
     telefono varchar(15)  NOT NULL,
     nombre varchar(25)  NOT NULL,
     apellido varchar(25)  NOT NULL,
-    direccion varchar(25)  NOT NULL,
+    direccion varchar(100)  NOT NULL,
     CONSTRAINT Cuenta_pk PRIMARY KEY (username)
 );
 
 -- Table: Encuesta
 CREATE TABLE Encuesta (
     Contenido_idContenido int  NOT NULL,
-    pregunta varchar(50)  NOT NULL,
+    pregunta varchar(100)  NOT NULL,
     CONSTRAINT Encuesta_pk PRIMARY KEY (Contenido_idContenido)
 );
 
@@ -165,6 +165,4 @@ ALTER TABLE Suscripcion ADD CONSTRAINT Suscripcion_Tag
     FOREIGN KEY (Tag_idTag)
     REFERENCES Tag (idTag)  
 ;
-
--- End of file.
 
