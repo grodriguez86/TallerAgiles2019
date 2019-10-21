@@ -1,89 +1,164 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Button,
-  Alert
-} from 'react-native';
+import React, {Component} from 'react';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import user from './components/usuario.js';
+{/*FALTA PASSWORD - FECHA NAC*/ }
 var userToShow;
-export default class Profile extends Component {
-  
+export default class viewCrearUsuario extends Component{
+
   constructor(usuario){
+    super()
     userToShow=usuario;
-  super()
-	}
-  render() {
-    return (
-      <View style={styles.container}>
-          <View style={styles.header}></View>
-          <View style={styles.header2}></View>
-          <View style={styles.body}>
-            <View style={styles.bodyContent}>
-              <Text style={styles.name}>{userToShow.usuario}</Text>
-              <Text style={styles.field}>Nombre:</Text>
-              <Text style={styles.information}>{userToShow.nombre}</Text>
-              <Text style={styles.field}>Apellido:</Text>
-              <Text style={styles.information}>{userToShow.apellido}</Text>
-			  <Text style={styles.field}>Fecha nacimiento:</Text>
-              <Text style={styles.information}>{userToShow.fechanac}</Text>
-              <Text style={styles.field}>Direcion:</Text>
-              <Text style={styles.information}>{userToShow.direccion}</Text>            
-              <Text style={styles.field}>Telefono:</Text>
-              <Text style={styles.information}>{userToShow.telefono}</Text>
-              <Text style={styles.field}>Email:</Text>
-              <Text style={styles.information}>{userToShow.email}</Text>
-              <Text style={styles.field}>Tags:</Text>
-              <Text style={styles.information}>{userToShow.tags}</Text>
-              <Text style={styles.information}></Text>
-         
-            </View>
+  }
+
+  render(){
+    return(
+    <View style={styles.container}>
+      <View style={styles.titulo}>{/*titulo*/}
+      <View style={{flex:1}}>
+          <View>
+            <Text style={{fontSize:26, color:'white', textAlign:'center', fontWeight: 'bold', paddingBottom:5}}>Ver perfil</Text>
+          </View>
         </View>
       </View>
+      <View style={styles.informacion}>{/*contenido de form -- flex 1*/}
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Nombre de usuario:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.usuario}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Nombre:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.nombre}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Apellido:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.apellido}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Email:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.email}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Direccion:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.direccion}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Fecha de nacimiento:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.fechanac}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+            <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Telefono:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.telefono}</Text>
+            </View>
+            </View>
+        </View>
+        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Tags:</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{userToShow.tags}</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={styles.botones}>{/*boton editar perfil*/}
+        <View style={{marginHorizontal:15, flexDirection:'row', flex:1, justifyContent:'center'}}>{/*Esta por fila*/}
+            <Button title="Editar perfil" 
+             color='#072F46'
+             onPress = {() => Alert.alert('Call edit profile')}
+            />
+          </View>
+      </View>
+    </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  header:{
-    backgroundColor: "#00333F",
-    height:100,
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  container:{
+  titulo: {
+    backgroundColor: '#072F46',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    height: 100,
+  },
+  botones: {
     backgroundColor: '#eeeeee',
-    height:10000,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 80,
   },
-  body:{
-    marginTop:0,
-  },
-  bodyContent: {
+  informacion: {
     flex: 1,
     alignItems: 'center',
-    padding:30,
-    
+    justifyContent: 'space-around',
+    backgroundColor: '#eeeeee',
   },
-  name:{
-    marginTop:30,
-    fontSize:30,
-    color: "black",
-    fontWeight: "600"
+  grupo: {
+    height:100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
-  field:{
-    marginLeft: -10,
-    marginTop: 15,
-    alignSelf: 'flex-start',
-    //marginTop:30,
-    fontSize:25,
-    color: '#072F46',
-    fontWeight: "600"
+  columna: {
+    flex: 1,
+    height:100,
+    alignItems: 'center',
   },
-  information:{
-    marginTop:10,
-    fontSize:20,
-    color: '#072F46',
-    fontWeight: "600"
-  },
-}); 
+  textStyle2:{
+    flex:1,
+    color :'#072F46',
+    textAlign:'left',
+    fontWeight: 'bold',
+    fontSize:16,
+    margin: 10,
+  }
+});
