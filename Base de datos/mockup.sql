@@ -1,14 +1,14 @@
-insert into Tag values (1,'deportes');
-insert into Tag values (2,'economia');
-insert into Tag values (3,'judicial');
-insert into Tag values (4,'cultura');
+insert into Tag values (0,'deportes');
+insert into Tag values (0,'economia');
+insert into Tag values (0,'judicial');
+insert into Tag values (0,'cultura');
 insert into Cuenta values ('pepe','pass',0,'pepon@gmail.com','1980-10-10',2266430303,'Roberto','Perez','calle 25 entre 30 y 28');
 insert into Cuenta values ('bill','microsoft',0,'billG@yahoo.com','1955-10-28',000000001,'Bill','Gates','Washington');
 insert into Cuenta values ('SJ','microsoftsucks',0,'billisamoron@yahoo.com','1955-02-24',000000002,'Steve','Jobs','Heaven');
-insert into Contenido Values (1,'Futbol y politica se mezclan','Desde el presidente Macri hasta el actual candidato a alcalde de Buenos Aires, son numerosos los casos de directivos de clubes que buscan el poder',1,'pepe');
-insert into Contenido Values (2,'Moderada alza del dólar','En el promedio de bancos la divisa se transa a $60,86 para la venta al público',2,'SJ');
-insert into Contenido Values (3,'Delegación china visitó','Esta actividad se realizó en el marco de un programa de intercambio de profesionales del Derecho',3,'bill');
-insert into Contenido Values (4,'Corte de pelo','Me corte el pelo',4,'SJ');
+insert into Contenido Values (0,'Futbol y politica se mezclan','Desde el presidente Macri hasta el actual candidato a alcalde de Buenos Aires, son numerosos los casos de directivos de clubes que buscan el poder',1,'pepe');
+insert into Contenido Values (0,'Moderada alza del dólar','En el promedio de bancos la divisa se transa a $60,86 para la venta al público',2,'SJ');
+insert into Contenido Values (0,'Delegación china visitó','Esta actividad se realizó en el marco de un programa de intercambio de profesionales del Derecho',3,'bill');
+insert into Contenido Values (0,'Corte de pelo','Me corte el pelo',4,'SJ');
 insert into Noticia values (1,'Acaso porque Buenos Aires es la ciudad con más estadios en el mundo, las elecciones a jefe de Gobierno de la capital argentina del domingo 27, a realizarse junto a los comicios nacionales, presentarán a un rostro flamante de un axioma ya conocido: el candidato que intenta pasar del fútbol a la política. Matías Lammens, de 39 años, es desde 2012 el presidente de uno de los cinco clubes grandes de la Superliga, San Lorenzo, y aunque representa al peronista Frente de Todos, no vería con malos ojos repetir la historia del presidente Mauricio Macri, quien hace 12 años dio el salto de Boca al mismo distrito.
 
 El fútbol y la política son indisociables en la geopolítica de América Latina. La presidencia de Boca fue el trampolín de exposición mediática y popularidad en el que Macri tomó impulso desde 1995 para lanzarse a los cargos públicos: acompañado por los resultados deportivos de su equipo, el empresario y heredero de una de las grandes fortunas del país, tardó doce años en llegar a la Jefatura de Gobierno de Buenos Aires, en 2007, y otros ocho a la presidencia argentina, en 2015.
@@ -51,8 +51,8 @@ Entre los asistentes que representaron el Poder Judicial de la Ciudad estuvieron
 
 En representación de la delegación china se destaca la presencia del Mingqi Zhang, Junjian He, Guotao Liu, Xiaoping Yang, Xinyan Pan y el intérprete Hsiu Hsieh Chang. Luego del diálogo e intercambio se obsequiaron presentes representativos de cada comunidad”.');
 insert into Encuesta values (4,'Me queda bien con el turtleneck?(foto)');
-insert into Articulo_Encuesta values (4,1,'si',0);
-insert into Articulo_Encuesta values (4,2,'Para el orto',253);
+insert into Articulo_Encuesta values (4,0,'si',0);
+insert into Articulo_Encuesta values (4,1,'Para el orto',253);
 insert into Comentario values ('SJ',3,'bill sos un boludo');
 insert into Comentario values ('bill',1,'muy interesante');
 insert into MeGusta values ('bill',1);

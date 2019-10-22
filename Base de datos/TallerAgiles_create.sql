@@ -21,7 +21,7 @@ CREATE TABLE Comentario (
 
 -- Table: Contenido
 CREATE TABLE Contenido (
-    idContenido int  NOT NULL,
+    idContenido int  NOT NULL AUTO_INCREMENT,
     titulo varchar(50)  NOT NULL,
     descripcion varchar(200)  NOT NULL,
     Tag_idTag int  NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE Suscripcion (
 
 -- Table: Tag
 CREATE TABLE Tag (
-    idTag int  NOT NULL,
+    idTag int  NOT NULL AUTO_INCREMENT,
     nombre varchar(25)  NOT NULL,
     CONSTRAINT Tag_pk PRIMARY KEY (idTag)
 );

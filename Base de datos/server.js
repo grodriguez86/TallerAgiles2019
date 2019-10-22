@@ -1,4 +1,4 @@
-// ------------------- REQUIRE ------------------- //
+// ------------------- REQUIRES ------------------- //
 var bodyParser = require('body-parser');
 var express = require('express');
 var mysql = require('mysql');
@@ -13,14 +13,14 @@ var GET_PERMISOS_USERNAME = 'SELECT Tag_idtag, Escritura, Lectura FROM Permisos 
 var GET_TAGS = 'SELECT * FROM Tag';
 var INSERT_INTO_COMENTARIO = 'INSERT INTO Comentario (Cuenta_username, Noticia_contenido_idcontenido, Texto_comentario) VALUES (?, ?, ?)';
 var INSERT_INTO_PERMISOS = 'INSERT INTO Permisos (Cuenta_username, Tag_idtag, Escritura, Lectura) VALUES (?, ?, ?, ?)';
-var INSERT_INTO_TAG = 'INSERT INTO Tag (Idtag, Nombre) VALUES (?, ?)';
+var INSERT_INTO_TAG = 'INSERT INTO Tag (Idtag, Nombre) VALUES (0, ?)';
 var INSERT_INTO_USER = 'INSERT INTO Cuenta (Username, Password, Admin, Mail, Fecha_nacimiento, Telefono, Nombre, Apellido, Direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);';
 
 // ------------------- VARIABLES ------------------- //
 var app = express();
 var port = 3000;
 
-// ------------------- CREACION DE LA API ------------------- //
+// ------------------- PARSER PARA MENSAJES HTML ------------------- //
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false 
@@ -92,7 +92,7 @@ app.get('/user/:username/permisos', function(req, res) {
     if (!username) {
         return res.status(400).send({ error: true, message: 'Error in parameters. Please provide a correct username.' });
     }
-    console.log(username);
+
     con.query(GET_PERMISOS_USERNAME, username, function(error, result) {
         if (error) {
 			console.log('There was an error while obtaining user permissions.');
@@ -114,7 +114,7 @@ app.get('/noticias', function(req, res) {
     });
 })
 
-app.get('/noticias/:id', function(req, res) {
+app.get('/noticia/:id', function(req, res) {
 
     var id = req.params.id;
 
@@ -149,7 +149,7 @@ app.post('/user', function(req, res) {
     });
 })
 
-app.post('/noticias/:id', function(req, res) {
+app.post('/noticia/:id/comentario', function(req, res) {
 
     var id = req.params.id;
 
@@ -162,21 +162,21 @@ app.post('/noticias/:id', function(req, res) {
 			console.log('There was an error during the insertion of a comment into a news item in the database.');
 			return res.status(400).send({ error: true, message: 'Error in parameters. Please provide correct news id.' });
 		};
-        return res.send({ error: false, data: results, message: 'The news ' + id  + ' was successfully charged.' });
+        return res.send({ error: false, data: results, message: 'The news ' + id  + ' was successfully commented.' });
     });
 })
 
-app.post('/label', function(req, res) {
+app.post('/tag', function(req, res) {
 
-    var label = req.body;
+    var tag = req.body;
 
-    if (!label) {
+    if (!tag) {
         return res.status(400).send({ error: true, message: 'Error in body. Please provide correct label.' });
     }
 
-    con.query(INSERT_INTO_TAG,[label.id,label.nombre], function(error, results, fields) {
+    con.query(INSERT_INTO_TAG,tag.nombre, function(error, results, fields) {
         if (error) {
-			console.log('There was an error while inserting a tag into a news item in the database.');
+			console.log('There was an error while inserting a tag into the database.');
 			return res.status(400).send({ error: true, message: 'Error in body. Please provide correct label.' });
 		};
         return res.send({ error: false, data: results, message: 'New label has been created successfully.' });
@@ -192,7 +192,7 @@ app.post('/user/:username/permisos', function(req, res) {
         return res.status(400).send({ error: true, message: 'Error in parameters. Please provide a correct username.' });
     }
 
-    con.query(INSERT_INTO_PERMISOS, [username,permisos.tag,1,1], function(error, results, fields) {
+    con.query(INSERT_INTO_PERMISOS, [username,permisos.tag,permisos.esc,permisos.lect], function(error, results, fields) {
         if (error) {
 			console.log("There was an error during the insertion of a user's permissions in the database.");
 			return res.status(400).send({ error: true, message: 'Error in parameters. Please provide a correct username.' });
@@ -204,11 +204,10 @@ app.post('/user/:username/permisos', function(req, res) {
 app.delete('/user', function(req, res) {
     
     var user = req.body;
-
     if (!user) {
         return res.status(400).send({ error: true, message: 'Error in body. Please provide user.' });
     }
-
+    console.log(user.nombre);
     con.query(DELETE_CUENTA_USERNAME, user.nombre, function(error, results, fields) {
         if (error) {
 			console.log('There was an error while deleting a user in the database.');
@@ -217,6 +216,8 @@ app.delete('/user', function(req, res) {
         return res.send({ error: false, data: results, message: 'The user has been deleted successfully.' });
     });
 })
+
+// ------------------- LEVANTAR SERVIDOR ------------------- //
 
 app.listen(port, function () {
     console.log('Node app is running on port ' + port);
