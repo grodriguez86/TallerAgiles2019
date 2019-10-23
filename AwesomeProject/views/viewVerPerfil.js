@@ -3,12 +3,20 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import user from './components/usuario.js';
 {/*FALTA PASSWORD - FECHA NAC*/ }
 var userToShow;
+var tags;
 export default class viewCrearUsuario extends Component{
 
   constructor(usuario){
     super()
     userToShow=usuario;
   }
+  fetch('http://172.29.29.54:3000/user/:userToShow.usuario/permisos', {
+        method: 'GET',
+        headers: {},
+		
+    }).then(function(response) {
+			tags = response.json;
+	});
 
   render(){
     return(
