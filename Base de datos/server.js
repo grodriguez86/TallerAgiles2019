@@ -11,6 +11,8 @@ var GET_NOTICIAS = 'SELECT c.Titulo, c.Descripcion, n.Contenido FROM Contenido c
 var GET_NOTICIA_ID = 'SELECT c.Titulo, c.Descripcion, n.Contenido FROM Contenido c INNER JOIN Noticia n ON (c.Idcontenido = n.Contenido_idContenido) WHERE n.Contenido_idContenido=?';
 var GET_PERMISOS_USERNAME = 'SELECT t.Nombre, p.Escritura, p.Lectura FROM Permisos p INNER JOIN Tag t ON (p.Tag_idTag = t.idTag) WHERE Cuenta_username=?';
 var GET_TAGS = 'SELECT * FROM Tag';
+var INSERT_INTO_CONTENIDO = 'INSERT INTO CONTENIDO (idContenido, titulo, descripcion, Tag_idTag, Cuenta_username) VALUES (0, ?, ?, ?, ?)';
+var INSERT_INTO_NOTICIA = 'INSERT INTO NOTICIA (Contenido_idContenido, contenido) VALUES (?, ?)';
 var INSERT_INTO_COMENTARIO = 'INSERT INTO Comentario (Cuenta_username, Noticia_contenido_idcontenido, Texto_comentario) VALUES (?, ?, ?)';
 var INSERT_INTO_PERMISOS = 'INSERT INTO Permisos (Cuenta_username, Tag_idtag, Escritura, Lectura) VALUES (?, ?, ?, ?)';
 var INSERT_INTO_TAG = 'INSERT INTO Tag (Idtag, Nombre) VALUES (0, ?)';
@@ -29,10 +31,10 @@ app.use(bodyParser.urlencoded({
 // ------------------- CONEXION CON MYSQL------------------- //
 var con = mysql.createConnection({
 	host: 'localhost',
-	user: 'guidomodarelli',
-	password: 'Librocorto13.-,',
+	user: 'root',
+	password: '1a2b3c4d',
 	insecureAuth : true,
-	database: 'talleragiles'
+	database: 'TallerAgiles'
 });
 
 con.connect(function(error) {
@@ -150,6 +152,42 @@ app.post('/user', function(req, res) {
 			};
 			return res.send({ error: false, data: results, message: 'New user has been created successfully.' });
     });
+})
+
+app.post('/noticia', function(req,res) {
+
+	var noticia = req.body;
+
+    if (!noticia) {
+			return res.status(400).send({ error: true, message: 'Error in body. Please provide correct news.' });
+	}
+	
+	con.query(INSERT_INTO_CONTENIDO, [noticia.titulo, noticia.descripcion, noticia.Tag_idTag, noticia.Cuenta_username], 
+	function(error, results, fields) {
+		if (error) {
+			console.log('There was an error while inserting news into the database.');
+			console.log(error);
+			return res.status(400).send({ error: true, message: 'Error in body. Please provide correct news.' });
+		}
+
+		var last_id = results.insertId;
+
+		con.query(INSERT_INTO_NOTICIA, [last_id, noticia.contenido], function(error, results, fields) {
+			if (error) {
+				console.log('There was an error while inserting news into the database.');
+				con.query('DELETE FROM CONTENIDO WHERE idContenido=?', [last_id], function(error, results, fields) { //Si hay un error al insertar la noticia, hay que eliminiar el contenido insertado previamente
+					if (error) {
+						console.log('There was an error while deleting a temporary content in the database.');
+						return res.status(400).send({ error: true, message: 'Error in body while inserting news. Please provide content.' });
+					};
+					return res.send({ error: false, data: results, message: 'The content has been deleted successfully.' });
+				})
+				return res.status(400).send({ error: true, message: 'Error in body. Please provide correct news.' });
+			}
+
+			return res.send({ error: false, data: results, message: 'News successfully uploaded.' });
+		});
+	});
 })
 
 app.post('/noticia/:id/comentario', function(req, res) {
