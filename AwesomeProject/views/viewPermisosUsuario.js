@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Picker, Button, Alert } from 'react-native';
 import user from '../components/usuario.js';
-import PickerUsuario from '../components/pickerUsuario.js'
-
-export default class viewCrearUsuario extends Component{
-
+import PickerUsuario from '../components/pickerUsuario.js';
+ 
+export default class viewPermisosUsuario extends Component{
+  static navigationOptions = {
+    headerTitleStyle: { 
+        textAlign:"center", 
+        flex:1,
+        marginLeft:-45,
+    },
+    title: 'Ver permisos de usuario',
+    };
   constructor(props){
     super(props);
     
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     flexDirection: 'row',
-    height: 100,
+    height: 0,
   },
   botones: {
     backgroundColor: '#eeeeee',
