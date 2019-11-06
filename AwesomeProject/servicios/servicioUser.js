@@ -6,6 +6,7 @@ export default function guardarUsuario(usuario){
         'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+
         username : usuario.usuario,
         password : usuario.password,
         apellido : usuario.apellido,
