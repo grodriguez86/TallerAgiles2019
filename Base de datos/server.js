@@ -11,9 +11,9 @@ var GET_NOTICIAS = 'SELECT c.Titulo, c.Descripcion, n.Contenido FROM Contenido c
 var GET_NOTICIA_ID = 'SELECT c.Titulo, c.Descripcion, n.Contenido FROM Contenido c INNER JOIN Noticia n ON (c.Idcontenido = n.Contenido_idContenido) WHERE n.Contenido_idContenido=?';
 var GET_PERMISOS_USERNAME = 'SELECT t.Nombre, p.Escritura, p.Lectura FROM Permisos p INNER JOIN Tag t ON (p.Tag_idTag = t.idTag) WHERE Cuenta_username=?';
 var GET_TAGS = 'SELECT * FROM Tag';
-var INSERT_INTO_CONTENIDO = 'INSERT INTO CONTENIDO (idContenido, titulo, descripcion, Tag_idTag, Cuenta_username) VALUES (0, ?, ?, ?, ?)';
-var INSERT_INTO_NOTICIA = 'INSERT INTO NOTICIA (Contenido_idContenido, contenido) VALUES (?, ?)';
 var INSERT_INTO_COMENTARIO = 'INSERT INTO Comentario (Cuenta_username, Noticia_contenido_idcontenido, Texto_comentario) VALUES (?, ?, ?)';
+var INSERT_INTO_CONTENIDO = 'INSERT INTO CONTENIDO (Idcontenido, Titulo, Descripcion, Tag_idtag, Cuenta_username) VALUES (0, ?, ?, ?, ?)';
+var INSERT_INTO_NOTICIA = 'INSERT INTO NOTICIA (Contenido_idcontenido, Contenido) VALUES (?, ?)';
 var INSERT_INTO_PERMISOS = 'INSERT INTO Permisos (Cuenta_username, Tag_idtag, Escritura, Lectura) VALUES (?, ?, ?, ?)';
 var INSERT_INTO_TAG = 'INSERT INTO Tag (Idtag, Nombre) VALUES (0, ?)';
 var INSERT_INTO_USER = 'INSERT INTO Cuenta (Username, Password, Admin, Mail, Fecha_nacimiento, Telefono, Nombre, Apellido, Direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);';
