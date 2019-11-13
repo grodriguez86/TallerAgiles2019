@@ -1,24 +1,35 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert,FlatList,SafeAreaView } from 'react-native';
 import user from './components/usuario.js';
 {/*FALTA PASSWORD - FECHA NAC*/ }
 var userToShow;
-var tags;
+var userTags:[];
+function Item({ title }) {
+  return (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  )}
 export default class viewCrearUsuario extends Component{
 
   constructor(usuario){
     super()
     userToShow=usuario;
+    
   }
-  fetch('http://172.29.29.54:3000/user/:userToShow.usuario/permisos', {
-        method: 'GET',
-        headers: {},
-		
-    }).then(function(response) {
-			tags = response.json;
-	});
+  
 
   render(){
+            
+    fetch("http://172.29.29.54:3000/user/bill/permisos")
+    .then(response => response.json())
+    .then((responseJson)=> {
+      this.setState({
+      loading: false,
+      userTags: responseJson
+      })
+    })
+    .catch(error=>console.log(error))
     return(
     <View style={styles.container}>
       <View style={styles.titulo}>{/*titulo*/}
@@ -32,7 +43,7 @@ export default class viewCrearUsuario extends Component{
         <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
           <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
             <View style={{flexDirection:'row'}}>
-              <Text style={styles.textStyle2}>Nombre de usuario:</Text>
+              <Text style={styles.textStyle2}>Nombre sde usuario:</Text>
             </View>
             <View style={{flexDirection:'row'}}>
               <Text style={styles.name}>{userToShow.usuario}</Text>
@@ -100,14 +111,7 @@ export default class viewCrearUsuario extends Component{
             </View>
         </View>
         <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
-          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
-          <View style={{flexDirection:'row'}}>
-              <Text style={styles.textStyle2}>Tags:</Text>
-            </View>
-            <View style={{flexDirection:'row'}}>
-              <Text style={styles.name}>{userToShow.tags}</Text>
-            </View>
-          </View>
+
         </View>
       </View>
       <View style={styles.botones}>{/*boton editar perfil*/}
