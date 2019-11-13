@@ -31,10 +31,10 @@ app.use(bodyParser.urlencoded({
 // ------------------- CONEXION CON MYSQL------------------- //
 var con = mysql.createConnection({
 	host: 'localhost',
-	user: 'root',
-	password: '1a2b3c4d',
+	user: 'matias',
+	password: '1234',
 	insecureAuth : true,
-	database: 'TallerAgiles'
+	database: 'agiles'
 });
 
 con.connect(function(error) {
@@ -205,6 +205,7 @@ app.post('/noticia/:id/comentario', function(req, res) {
 			};
 			return res.send({ error: false, data: results, message: 'The news ' + id  + ' was successfully commented.' });
 	});
+	
 })
 
 app.post('/tag', function(req, res) {
@@ -260,6 +261,26 @@ app.delete('/user', function(req, res) {
 		return res.send({ error: false, data: results, message: 'The user has been deleted successfully.' });
 	});
 })
+
+app.post('/login', function(request, response) {
+	var username = request.body.username;
+	var password = request.body.password;
+	console.log(request.body);
+	if (username && password) {
+		con.query('SELECT 1 FROM Cuenta WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				//response.redirect('/noticias');
+				response.send('Bienvenido '+username);
+			} else {
+				response.send('Incorrect Username and/or Password!');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter Username and Password!');
+		response.end();
+	}
+});
 
 // ------------------- LEVANTAR SERVIDOR ------------------- //
 
