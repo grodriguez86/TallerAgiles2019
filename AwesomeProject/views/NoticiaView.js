@@ -11,16 +11,16 @@ export default class NoticiaView extends Component{
         <ScrollView>
           <View style={styles.headerTitulo}>
 
-              <Text style={styles.textDate}>{this.props.noticia.fecha}</Text>
+              <Text style={styles.textDate}>{/*this.props.noticia.fecha*/}</Text>
 
               <Text style={styles.textTitulo}>{this.props.noticia.titulo}</Text>         
 
           </View>
           <View style={styles.informacion}>
 
-            <Text style={styles.textStyleNoticia}>{this.props.noticia.cuerpo}</Text>
+            <Text style={styles.textStyleNoticia}>{this.props.noticia.contenido}</Text>
         
-            <Text style={styles.textStyleAutor}>{this.props.noticia.autor}</Text>
+            <Text style={styles.textStyleAutor}>{/*this.props.noticia.autor*/}</Text>
 
           </View>
         </ScrollView>
