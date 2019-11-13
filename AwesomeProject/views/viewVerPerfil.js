@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert,FlatList,SafeAreaView } from 'react-native';
-import user from './components/usuario.js';
+import user from '../components/usuario.js';
 {/*FALTA PASSWORD - FECHA NAC*/ }
 var userToShow;
 var userTags:[];
@@ -11,7 +11,14 @@ function Item({ title }) {
     </View>
   )}
 export default class viewCrearUsuario extends Component{
-
+  static navigationOptions = {
+    headerTitleStyle: { 
+        textAlign:"center", 
+        flex:1,
+        marginLeft:-45,
+    },
+    title: 'Ver Perfil',
+    };
   constructor(usuario){
     super()
     userToShow=usuario;
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     flexDirection: 'row',
-    height: 100,
+    height: 0,
   },
   botones: {
     backgroundColor: '#eeeeee',
