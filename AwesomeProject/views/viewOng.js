@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 {/*FALTA PASSWORD - FECHA NAC*/ }
 var userToShow;
 var tags;
+var flex = 1;
+var flexDirection = 'column';
 export default class viewCrearUsuario extends Component{
     static navigationOptions = {
     headerTitleStyle: { 
@@ -19,41 +21,43 @@ export default class viewCrearUsuario extends Component{
   
   render(){
     return(
-    <View style={styles.container}>
-      <View style={styles.titulo}>{/*titulo*/}
-      <View style={{flex:1}}>
-          <View>
-            <Text style={{fontSize:26, color:'white', textAlign:'center', fontWeight: 'bold', paddingBottom:5}}>Ver perfil</Text>
-          </View>
-        </View>
+      <View style={{backgroundColor: '#FFFFFF'}}>
+      <View style={{flexDirection:flexDirection}}>
+        <Text style={{fontSize:18, textAlign:'left', fontWeight: 'bold', paddingBottom:5}}>
+          Para el bienestar común del grupo como de la comunidad.
+          La ONG se originó por un grupo de vecinos convencidos de que el trabajo colectivo es mucho más importante que la suma de sus partes.
+          Tiene por finalidad las siguientes acciones:
+        </Text>
       </View>
-      <View style={styles.informacion}>{/*contenido de form -- flex 1*/}
-        <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
-          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
-            <View style={{flexDirection:'row'}}>
-              <Text style={styles.textStyle2}></Text>
-            </View>
-            <View style={{flexDirection:'row'}}>
-              <Text style={styles.name}>para el bienestar común del grupo como de la comunidad.
-La ONG se originó por un grupo de vecinos convencidos de que el trabajo colectivo es mucho más importante que la suma de sus partes.
-Tiene por finalidad las siguientes acciones:
-   • Desarrollar un ambiente de cordialidad y solidaridad entre sus asociados y proponer el mejoramiento intelectual y cultural de los mismos.
-   • Representar y defender los intereses y derechos de sus asociados.
-   • Promover, defender y difundir las incumbencias de los asociados.
-   • Promover principios de solidaridad a través de la organización y constitución de servicios sociales y recreativos.
-   • Colaborar con el cuidado y la preservación del medio ambiente.
-   • Todas las actividades a desarrollar serán sin fines de lucro.</Text>
-            </View>
-          </View>
-        </View>
+      <View style={{flexDirection:flexDirection}}>
+        <Text style={{fontSize:18, textAlign:'left', fontWeight: 'bold', paddingBottom:5}}> 
+           • Desarrollar un ambiente de cordialidad y solidaridad entre sus asociados y proponer el mejoramiento intelectual y cultural de los mismos.
+        </Text>
       </View>
-      <View style={styles.botones}>{/*boton editar perfil*/}
-        <View style={{marginHorizontal:15, flexDirection:'row', flex:1, justifyContent:'center'}}>{/*Esta por fila*/}
-            <Button title="Editar perfil" 
-             color='#072F46'
-             onPress = {() => Alert.alert('Call edit profile')}
-            />
-          </View>
+      <View style={{flexDirection:flexDirection}}>
+        <Text style={{fontSize:18, textAlign:'left', fontWeight: 'bold', paddingBottom:5}}> 
+           • Representar y defender los intereses y derechos de sus asociados.
+        </Text>
+      </View>
+      <View style={{flexDirection:flexDirection}}>
+        <Text style={{fontSize:18, textAlign:'left', fontWeight: 'bold', paddingBottom:5}}> 
+           • Promover, defender y difundir las incumbencias de los asociados.
+        </Text>
+      </View>
+      <View style={{flexDirection:flexDirection}}>
+        <Text style={{fontSize:18, textAlign:'left', fontWeight: 'bold', paddingBottom:5}}> 
+           • Promover principios de solidaridad a través de la organización y constitución de servicios sociales y recreativos.
+        </Text>
+      </View>
+      <View style={{flexDirection:flexDirection}}>
+        <Text style={{fontSize:18, textAlign:'left', fontWeight: 'bold', paddingBottom:5}}> 
+           • Colaborar con el cuidado y la preservación del medio ambiente.
+        </Text>
+      </View>
+      <View style={{flexDirection:flexDirection}}>
+        <Text style={{fontSize:18, textAlign:'left', fontWeight: 'bold', paddingBottom:5}}> 
+           • Todas las actividades a desarrollar serán sin fines de lucro.
+        </Text>
       </View>
     </View>
     );
