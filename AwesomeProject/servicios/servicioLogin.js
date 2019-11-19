@@ -1,5 +1,5 @@
 export default function login(usuario,password){    
-    fetch('http://10.13.26.249:3000/login', {
+    fetch('http://172.29.14.159:3000/login', {
         method: 'POST',
         headers: {
         Accept: 'application/json',
