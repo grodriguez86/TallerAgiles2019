@@ -31,10 +31,10 @@ app.use(bodyParser.urlencoded({
 // ------------------- CONEXION CON MYSQL------------------- //
 var con = mysql.createConnection({
 	host: 'localhost',
-	user: 'matias',
-	password: '1234',
+	user: 'guidomodarelli',
+	password: 'Librocorto13.-,',
 	insecureAuth : true,
-	database: 'agiles'
+	database: 'talleragiles'
 });
 
 con.connect(function(error) {
