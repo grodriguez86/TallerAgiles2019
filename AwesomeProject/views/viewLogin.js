@@ -3,7 +3,8 @@ import { StyleSheet, Text, TextInput, View, TouchableHighlight, Alert, ImageBack
 import login from '../servicios/servicioLogin'
 
 export default class viewLogin extends Component{
-    static navigationOptions = {
+    
+  static navigationOptions = {
     headerTitleStyle: { 
         textAlign:"center", 
         flex:1,
@@ -12,6 +13,7 @@ export default class viewLogin extends Component{
     title: 'Login',
     };
     
+
     state = {
             usuario: '',
             password: ''
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
       fontSize:12,
       margin: 10,
     },
+
     textStyle2:{
       color :'#072F46',
       textAlign:'left',
