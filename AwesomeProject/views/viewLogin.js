@@ -72,7 +72,7 @@ export default class viewLogin extends Component{
  
     onLogin()
     {  
-      login(this.usuario,this.password);
+      login(this.state.usuario,this.state.password);
       
     }
 
