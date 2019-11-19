@@ -21,15 +21,7 @@ export default class viewCrearUsuario extends Component{
 
   render(){
             
-    fetch("http://172.29.29.54:3000/user/bill/permisos")
-    .then(response => response.json())
-    .then((responseJson)=> {
-      this.setState({
-      loading: false,
-      userTags: responseJson
-      })
-    })
-    .catch(error=>console.log(error))
+
     return(
     <View style={styles.container}>
       <View style={styles.titulo}>{/*titulo*/}
