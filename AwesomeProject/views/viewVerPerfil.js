@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert,FlatList,SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import user from '../components/usuario.js';
 {/*FALTA PASSWORD - FECHA NAC*/ }
 var userToShow;
-var userTags:[];
-function Item({ title }) {
-  return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  )}
+var tags;
 export default class viewCrearUsuario extends Component{
   static navigationOptions = {
     headerTitleStyle: { 
@@ -22,13 +16,9 @@ export default class viewCrearUsuario extends Component{
   constructor(usuario){
     super()
     userToShow=usuario;
-    
   }
   
-
   render(){
-            
-
     return(
     <View style={styles.container}>
       <View style={styles.titulo}>{/*titulo*/}
@@ -42,7 +32,7 @@ export default class viewCrearUsuario extends Component{
         <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
           <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
             <View style={{flexDirection:'row'}}>
-              <Text style={styles.textStyle2}>Nombre sde usuario:</Text>
+              <Text style={styles.textStyle2}>Nombre de usuario:</Text>
             </View>
             <View style={{flexDirection:'row'}}>
               <Text style={styles.name}>{userToShow.usuario}</Text>
@@ -110,7 +100,11 @@ export default class viewCrearUsuario extends Component{
             </View>
         </View>
         <View style={styles.grupo}>{/*justifyContent 'row' -- flex 1 */}
-
+          <View style={styles.columna}>{/*Text y textinput -- flex 1*/}
+          <View style={{flexDirection:'row'}}>
+              <Text style={styles.textStyle2}>Tags:</Text>
+            </View>
+          </View>
         </View>
       </View>
       <View style={styles.botones}>{/*boton editar perfil*/}
@@ -172,4 +166,4 @@ const styles = StyleSheet.create({
     fontSize:16,
     margin: 10,
   }
-});
+}); 
