@@ -1,0 +1,40 @@
+Instrucciones para crear servidor mysql en linux:
+
+--> https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/ <--
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+$ /usr/bin/mysql -u root -p 
+
+Si la instruccion anterior da error al colocar la contraseña, entonces:
+
+$ sudo mysql -u root #
+mysql> USE mysql;
+mysql> CREATE USER 'USER'@'localhost' IDENTIFIED BY 'Password';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'USER'@'localhost';
+mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='USER';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+USER --> Nombre de usuario de tu maquina.
+Password --> La contraseña que elijas.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+=================================================================================================================================================
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+$ service mysql restart 
+
+Con eso te creas un nuevo usuario para la base de datos, que podes usar para abrir el shell de mysql, y para autenticarte desde node.js.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+En la shell de mysql:
+
+$ Create database NOMBRE;
+$ USE NOMBRE;
+$ source ARCHIVO;
+
+mysql en Node --> ((( $ npm install mysql )))
+
+Test de la base --> Modificar las credenciales en "server.js"
+
+

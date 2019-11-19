@@ -1,0 +1,27 @@
+API REST:
+
+^ -> Mismos campos que metodo anterior
+* -> Todos los campos de la entidad correspondiente
+X -> No se requieren datos
+
+|------------+--------+--------------------------+-------------------------------------------------------------------------------------+--------------+---------|
+| Tabla      | Metodo | URL                      | Descripcion                                                                         |     Json OUT | Json IN |
+|------------+--------+--------------------------+-------------------------------------------------------------------------------------+-------------:+--------:|
+| Noticia    | GET    | /noticias                | Obtiene la lista completa de noticias                                               |  Cont.Titulo |         |
+| Noticia    |        |                          |                                                                                     |  Cont.Descrp |       X |
+| Noticia    |        |                          |                                                                                     | Noticia.Cont |         |
+| Noticia    | GET    | /noticias/:id            | Obtiene una noticia en particular                                                   |            ^ |       X |
+| Tag        | GET    | /tags                    | Obtiene la lista completa de tags                                                   |            * |       X |
+| Tag        | POST   | /tag                     | Añade un nuevo tag a la base de datos                                               |            X |  IDTa g |
+| Tag        |        |                          |                                                                                     |              |  Nombre |
+| Cuenta     | GET    | /users                   | Obtiene la lista completa de usuarios                                               |            * |       X |
+| Cuenta     | GET    | /user/:username          | Obtiene los datos de un usuario particular, pasado por url por su nombre de usuario |            * |       X |
+| Cuenta     | POST   | /user                    | Crea un nuevo usuario en la base de datos                                           |            X |       * |
+| Cuenta     | DELETE | /user                    | Elimina un usuario particular                                                       |            X |       * |
+| Permisos   | GET    | /user/:username/permisos | Obtiene la lista de permisos de un usuario                                          |   Tag.Nombre |       X |
+| Permisos   |        |                          |                                                                                     |  Perm.Escrit |         |
+| Permisos   |        |                          |                                                                                     |  Perm.Lectur |         |
+| Permisos   | POST   | /user/:username/permisos | Añade permisos a un usuario determinado                                             |            X |       * |
+| Comentario | POST   | /noticia/:id/comentario  | Añade a la base de datos un comentario realizado en una noticia                     |            X |       * |
+|------------+--------+--------------------------+-------------------------------------------------------------------------------------+--------------+---------|
+
