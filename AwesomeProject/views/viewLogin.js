@@ -3,6 +3,15 @@ import { StyleSheet, Text, TextInput, View, TouchableHighlight, Alert, ImageBack
 import login from '../servicios/servicioLogin'
 
 export default class viewLogin extends Component{
+    static navigationOptions = {
+    headerTitleStyle: { 
+        textAlign:"center", 
+        flex:1,
+        marginLeft:-45,
+    },
+    title: 'Login',
+    };
+    
     state = {
             usuario: '',
             password: ''
@@ -45,7 +54,7 @@ export default class viewLogin extends Component{
                         <Text style={styles.textStyle2}>Contraseña:</Text>
                    </View>
                    <View>
-                        <TextInput secureTextEntry={true} style={styles.textStyle} 
+                        <TextInput secureTextEntry={true} style={styles.textStyle1} 
                           placeholder="Contraseña"
                           onChangeText ={this.actualizarPassword}
                           />
@@ -118,6 +127,12 @@ const styles = StyleSheet.create({
     textoBoton:{
       color:'white',
       fontWeight: 'bold',
+    },
+    textStyle1:{
+      color :'#072F46',
+      textAlign:'center',
+      fontSize:12,
+      margin: 10,
     },
     textStyle2:{
       color :'#072F46',
