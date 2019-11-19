@@ -11,6 +11,7 @@ var GET_NOTICIAS = 'SELECT c.Titulo, c.Descripcion, n.Contenido FROM Contenido c
 var GET_NOTICIA_ID = 'SELECT c.Titulo, c.Descripcion, n.Contenido FROM Contenido c INNER JOIN Noticia n ON (c.Idcontenido = n.Contenido_idContenido) WHERE n.Contenido_idContenido=?';
 var GET_PERMISOS_USERNAME = 'SELECT t.Nombre, p.Escritura, p.Lectura FROM Permisos p INNER JOIN Tag t ON (p.Tag_idTag = t.idTag) WHERE Cuenta_username=?';
 var GET_TAGS = 'SELECT * FROM Tag';
+var CHECK_USER_AND_PASS = 'SELECT 1 FROM Cuenta WHERE username = ? AND password = ?';
 var INSERT_INTO_COMENTARIO = 'INSERT INTO Comentario (Cuenta_username, Noticia_contenido_idcontenido, Texto_comentario) VALUES (?, ?, ?)';
 var INSERT_INTO_CONTENIDO = 'INSERT INTO CONTENIDO (Idcontenido, Titulo, Descripcion, Tag_idtag, Cuenta_username) VALUES (0, ?, ?, ?, ?)';
 var INSERT_INTO_NOTICIA = 'INSERT INTO NOTICIA (Contenido_idcontenido, Contenido) VALUES (?, ?)';
@@ -263,13 +264,13 @@ app.delete('/user', function(req, res) {
 })
 
 app.post('/login', function(request, response) {
+
 	var username = request.body.username;
 	var password = request.body.password;
-	console.log(request.body);
+
 	if (username && password) {
-		con.query('SELECT 1 FROM Cuenta WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+		con.query(CHECK_USER_AND_PASS, [username, password], function(error, results, fields) {
 			if (results.length > 0) {
-				//response.redirect('/noticias');
 				response.send('Bienvenido '+username);
 			} else {
 				response.send('Incorrect Username and/or Password!');
